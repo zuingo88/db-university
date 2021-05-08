@@ -1,0 +1,119 @@
+Sulla base di quanto visto a lezione modellizzare la realtà di un'università definendo colonne con nome, tipo di dato e vincoli di integrità per queste entità:
+- dipartimento
+- corso di laurea
+- corso
+- insegnante
+- appello
+- studente
+- esito
+
+Ogni dipartimento e' composto da corsi di laura, formati da corsi, gestiti da insegnanti, che prevedono appelli per studenti, che avranno un esito finale
+NOTE: come detto in classe, in caso di ambiguità, cercare di immaginare una possibile realtà, e nel caso sia una scelta poco chiara, descriverla con poche parole
+
+
+______________________________________________________________________________________
+-- struttura dato --
+
+nome_del_dato : tipo_di_dato
+______________________________________________________________________________________
+
+
+-- DIPARTIMENTO --
+
+nome: VARCHAR(128) ; NOT NULLABLE
+sede_centrale: VARCHAR(128) ; NOT NULLABLE
+responsabile_amministrativo:VARCHAR(64) ; NOT NULLABLE
+indirizzo_web: VARCHAR(128) ; NOT NULLABLE
+telefono: VARCHAR(32) ; NULLABLE
+sede_distaccata: VARCHAR(128) ; NULLABLE
+______________________________________________________________________________________
+
+-- CORSO DI LAUREA --
+
+titolo: VARCHAR(128); NOT NULLABLE
+tipo: VARCHAR(32) ; NOT NULLABLE
+classe_laurea: VARCHAR(32) ; NULLABLE
+sede: VARCHAR(128) ; NOT NULLABLE
+durata: VARCHAR(32) ; NOT NULLABLE
+cfu_previsti: VARCHAR(16) ; NOT NULLABLE
+titolo_rilasciato: VARCHAR(64) ; NOT NULLABLE
+requisiti_accesso: TEXT ; NULLABLE
+programma_erasmus: TEXT ; NULLABLE
+descrizione: TEXT ; NOT NULLABLE
+indirizzo_web: VARCHAR(128) ; NOT NULLABLE
+sede_segreteria_studenti: VARCHAR(128) ; NOT NULLABLE
+orari_segreteria: VARCHAR(128) ; NOT NULLABLE
+indirizzo_web_segreteria_studenti: VARCHAR(128) ; NOT NULLABLE
+______________________________________________________________________________________
+
+-- CORSO --
+
+titolo: VARCHAR(128); NOT NULLABLE
+insegnante: VARCHAR(64) ; NOT NULLABLE
+durata: VARCHAR(16) ; NOT NULLABLE
+lingua: VARCHAR(64) ; NOT NULLABLE
+tirocinio: VARCHAR(8) NOT NULLABLE [SI/NO O TRUE/FALSE]
+durata_tirocinio: VARCHAR(16) ; NULLABLE
+presenza_obbligatoria: VARCHAR(8) ; NOT NULLABLE  [SI/NO O TRUE/FALSE]
+cfu_rilasciati: VARCHAR(16) ; NOT NULLABLE
+indirizzo_web: VARCHAR(128) ; NOT NULLABLE
+______________________________________________________________________________________
+
+-- INSEGNANTE --
+
+nome: VARCHAR(64) ; NOT NULLABLE
+cognome: VARCHAR(64) ; NOT NULLABLE
+username: VARCHAR(64) ; NOT NULLABLE ; UNIQUE
+password: VARCHAR(64) ; NOT NULLABLE ;
+data_ nascita: DATE ; NOT NULLABLE
+codice_fiscale: VARCHAR(16) ; NOT NULLABLE ; UNIQUE
+cittadinanza: VARCHAR(32) ; NOT NULLABLE
+luogo_nascita: VARCHAR(32) ; NOT NULLABLE
+residenza: VARCHAR(128) ; NOT NULLABLE 
+mail: VARCHAR(128) ; NOT NULLABLE
+telefono: VARCHAR(16) ; NOT NULLABLE
+
+link_cv: VARCHAR(128) ; NULLABLE
+iban: VARCHAR(128) ; NOT NULLABLE
+______________________________________________________________________________________
+
+-- APPELLO --
+
+titolo: VARCHAR(128) ; NOT NULLABLE
+sessione: VARCHAR(32) ; NOT NULLABLE
+data: DATE ; NOT NULLABLE
+sede: VARCHAR(128) ; NOT NULLABLE
+______________________________________________________________________________________
+
+-- STUDENTE --
+
+matricola: TINYINT ; AUTO_INCREMENTS ; NOT NULLABLE ; UNIQUE
+nome: VARCHAR(64) ; NOT NULLABLE
+cognome: VARCHAR(64) ; NOT NULLABLE
+username: VARCHAR(64) ; NOT NULLABLE ; UNIQUE
+password: VARCHAR(64) ; NOT NULLABLE ;
+data_ nascita: DATE ; NOT NULLABLE
+codice_fiscale: VARCHAR(16) ; NOT NULLABLE ; UNIQUE
+cittadinanza: VARCHAR(32) ; NOT NULLABLE
+luogo_nascita: VARCHAR(64) ; NOT NULLABLE
+residenza: VARCHAR(128) ; NOT NULLABLE
+mail: VARCHAR(128) ; NOT NULLABLE
+telefono: VARCHAR(16) ; NOT NULLABLE
+
+data_iscrizione: DATE ; NOT NULLABLE
+isee: VARCHAR(32) ; NOT NULLABLE
+stato_pagamenti: VARCHAR(32) ; NOT NULLABLE
+titolare_borsa_studio: VARCHAR(32) ; NOT NULLABLE  [SI/NO O TRUE/FALSE + EVENTUALE PICCOLA NOTA] 
+titolare_residenza: VARCHAR(32) ; NOT NULLABLE  [SI/NO O TRUE/FALSE + EVENTUALE PICCOLA NOTA]
+
+n_esami_superati: VARCHAR(8) NULLABLE
+cfu_conseguiti: VARCHAR(16) ; NULLABLE
+media_voto: VARCHAR(16) ; NULLABLE
+______________________________________________________________________________________
+
+-- ESITO --
+
+superamento: VARCHAR(16) ; NOT NULLABLE
+voto: VARCHAR(8) ; NOT NULLABLE
+cfu_conseguiti: VARCHAR(16) ; NOT NULLABLE
+______________________________________________________________________________________
